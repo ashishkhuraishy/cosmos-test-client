@@ -1,0 +1,12 @@
+syntax = "proto3";
+package testnet.testnet;
+
+import "gogoproto/gogo.proto";
+import "testnet/testnet/params.proto";
+
+option go_package = "github.com/ashishkhuraishy/test-net/x/testnet/types";
+
+// GenesisState defines the testnet module's genesis state.
+message GenesisState {
+  Params params = 1 [(gogoproto.nullable) = false];
+}

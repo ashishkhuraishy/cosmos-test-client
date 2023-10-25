@@ -1,0 +1,7 @@
+syntax = "proto3";
+package testnet.testnet;
+
+option go_package = "github.com/ashishkhuraishy/test-net/x/testnet/types";
+
+// Msg defines the Msg service.
+service Msg {}
