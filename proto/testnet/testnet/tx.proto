@@ -1,7 +1,20 @@
 syntax = "proto3";
+
 package testnet.testnet;
 
 option go_package = "github.com/ashishkhuraishy/test-net/x/testnet/types";
 
 // Msg defines the Msg service.
-service Msg {}
+service Msg {
+  rpc CreateItem (MsgCreateItem) returns (MsgCreateItemResponse);
+}
+message MsgCreateItem {
+           string creator  = 1;
+           string question = 2;
+  repeated string options  = 3;
+}
+
+message MsgCreateItemResponse {
+  string testData = 1;
+}
+

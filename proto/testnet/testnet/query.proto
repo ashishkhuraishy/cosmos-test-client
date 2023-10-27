@@ -1,26 +1,58 @@
 syntax = "proto3";
+
 package testnet.testnet;
 
 import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "testnet/testnet/params.proto";
+import "testnet/testnet/stored_poll.proto";
 
 option go_package = "github.com/ashishkhuraishy/test-net/x/testnet/types";
 
 // Query defines the gRPC querier service.
 service Query {
+  
   // Parameters queries the parameters of the module.
-  rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
+  rpc Params (QueryParamsRequest) returns (QueryParamsResponse) {
     option (google.api.http).get = "/ashishkhuraishy/test-net/testnet/params";
+  
+  }
+  
+  // Queries a list of StoredPoll items.
+  rpc StoredPoll    (QueryGetStoredPollRequest) returns (QueryGetStoredPollResponse) {
+    option (google.api.http).get = "/ashishkhuraishy/test-net/testnet/stored_poll/{index}";
+  
+  }
+  rpc StoredPollAll (QueryAllStoredPollRequest) returns (QueryAllStoredPollResponse) {
+    option (google.api.http).get = "/ashishkhuraishy/test-net/testnet/stored_poll";
+  
   }
 }
-
 // QueryParamsRequest is request type for the Query/Params RPC method.
 message QueryParamsRequest {}
 
 // QueryParamsResponse is response type for the Query/Params RPC method.
 message QueryParamsResponse {
+  
   // params holds all the parameters of this module.
   Params params = 1 [(gogoproto.nullable) = false];
 }
+
+message QueryGetStoredPollRequest {
+  string index = 1;
+}
+
+message QueryGetStoredPollResponse {
+  StoredPoll storedPoll = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllStoredPollRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllStoredPollResponse {
+  repeated StoredPoll                             storedPoll = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+

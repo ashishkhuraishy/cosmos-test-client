@@ -1,0 +1,12 @@
+syntax = "proto3";
+package testnet.testnet;
+
+option go_package = "github.com/ashishkhuraishy/test-net/x/testnet/types";
+
+message StoredPoll {
+  string index = 1; 
+  string question = 2; 
+  repeated string voters = 3; 
+  
+}
+
